@@ -7,9 +7,17 @@ lang: es
 
 ## Contexto y motivación del estudio
 
+Análisis factorial de la encuesta edumer realizada entre (año) y (año), que busca medir las percepciones de desiguladad dentro del ámbito escolar. Basado en una escala de percepciones y creencias sobre meritocracia (Castillo et al, 2023)
+
 ## Antecedentes y conceptos 
 
-## Resumenes by chatgpt
+Meritocracia (ocupar a Young que siempre se ocupa) creencia de esfuerzo y trabajo propio como culpable del exito
+
+Creencia de la meritocracia en la escuela (Wiederkehr et al): la creencia en el merito dentro del contexto escolar opera de forma de justificar el sistema y la posición misma que se tiene en el sistema, escondiendo o dejando de lado cuestiones como el género o la clase.
+
+Darnon et al (2017) plantean en su experimento que ante la exposición a la idea del mérito existente, las brechas entre estudiantes de bajos y altos recursos aumenta, lo que podría fomentar la idea de la meritocracia como perpetuadora del sistema, ya que mantiene en el lugar que ya se le ha asignado a la gente. Como una suerte de profecia autocumplida
+
+## Resumenes by chatgpt y Yo
 
 #### *Batruch et al*
 
@@ -37,8 +45,8 @@ En conclusión, el estudio sugiere que, aunque la meritocracia escolar suele pro
 
 El artículo de Wiederkehr et al. (2015) explora cómo la creencia en la meritocracia escolar (BSM) funciona como una herramienta de justificación del sistema, especialmente entre estudiantes de bajo estatus social. La BSM sostiene que el éxito escolar depende únicamente del esfuerzo individual y la voluntad, a pesar de la evidencia de que factores como la clase social y el género también influyen en los resultados académicos. Los autores argumentan que esta creencia permite a los estudiantes de bajo estatus aceptar su posición en la jerarquía social como algo merecido, lo que ayuda a reducir su percepción de desigualdad y amenaza de injusticia.
 
-En el primer estudio, se encontró que los estudiantes de bajo estatus social que creen en la BSM tienden a justificar la sociedad como justa y meritocrática, algo que no ocurrió entre los estudiantes de alto estatus. Esto sugiere que para los estudiantes de bajo estatus, la BSM proporciona un marco que legitima su futuro lugar en la sociedad, dándoles una ilusión de control sobre su movilidad social.
+En el primer estudio, se encontró que los estudiantes de bajo estatus social que creen en la BSM tienden a justificar la sociedad como justa y meritocrática, algo que no ocurrió entre los estudiantes de alto estatus. Esto sugiere que para los estudiantes de bajo estatus, la BSM proporciona un marco que legitima su futuro lugar en la sociedad, dándoles una ilusión de control sobre su movilidad social. Además, las mujeres que creen en la BSM, están relacionadas con las creencias justificadoras del sistema.
 
-El segundo estudio analizó cómo reaccionan los estudiantes de diferentes niveles de estatus ante la presión de los procesos de selección en la universidad. Los resultados indicaron que los estudiantes de bajo estatus aumentaron su creencia en la BSM cuando se les recordó la alta tasa de fracaso académico, lo que sugiere que la dependencia de este sistema para lograr la movilidad social refuerza la BSM como una forma de justificar su posición futura.
+El segundo estudio analizó cómo reaccionan los estudiantes de diferentes niveles de estatus ante la muestra de como son los procesos de selección en la universidad. Los resultados indicaron que los estudiantes de bajo estatus aumentaron su creencia en la BSM cuando se les recordó la alta tasa de fracaso académico, lo que sugiere que la dependencia de este sistema para lograr la movilidad social refuerza la BSM como una forma de justificar su posición futura. Esto no ocurrio en estudiantes de alto status, quienes redujeron su BSM
 
 En conjunto, los hallazgos de ambos estudios apoyan la idea de que la BSM actúa como una herramienta de justificación del sistema para los estudiantes de bajo estatus, facilitándoles aceptar la desigualdad social como justa y legítima. Este mecanismo, aunque reduce el malestar asociado a la desigualdad, puede perpetuar la estratificación social al hacer que los estudiantes de bajo estatus internalicen su lugar en el sistema como merecido, limitando así su apoyo a reformas estructurales que podrían promover una mayor equidad.
