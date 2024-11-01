@@ -7,21 +7,38 @@ lang: es
 
 ## Contexto y motivación del estudio
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+## Antecedentes y conceptos 
 
-## Antecedentes y conceptos
+## Resumenes by chatgpt
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+#### *Batruch et al*
 
-```{r}
-1 + 1
-```
+El estudio de Batruch et al. (2022) examina cómo la creencia en la meritocracia escolar —la idea de que el rendimiento académico se basa exclusivamente en el mérito, sin influencias de clase o antecedentes socioeconómicos— afecta las actitudes hacia la desigualdad en la sociedad. Según los autores, las instituciones educativas promueven esta creencia como parte de su cultura institucional, transmitiendo la idea de que el éxito académico depende solo del esfuerzo y el talento, sin tener en cuenta el origen social de los estudiantes. Sin embargo, a pesar de esta creencia, múltiples investigaciones han demostrado que la desigualdad educativa persiste y que factores como el estatus socioeconómico pueden influir considerablemente en los logros académicos.
 
-You can add options to executable code like this
+El artículo se basa en cuatro estudios que exploran el impacto de la creencia en la meritocracia escolar en la percepción de la justicia social. Estos estudios incluyeron tanto métodos correlacionales como experimentales y análisis de encuestas internacionales, y en conjunto abarcaron muestras de más de 88,000 personas en más de 40 países. Los resultados revelan que las personas que creen en la meritocracia escolar perciben menos injusticia en la desigualdad de clases y son menos propensas a apoyar políticas de acción afirmativa en las universidades o medidas redistributivas para reducir la desigualdad de ingresos. En otras palabras, aquellos que consideran que las escuelas operan bajo principios meritocráticos también tienden a justificar las jerarquías sociales y económicas existentes en la sociedad.
 
-```{r}
-#| echo: false
-2 * 2
-```
+En uno de los estudios experimentales, se manipuló la percepción de los participantes sobre el grado de meritocracia en las escuelas australianas, observándose que aquellos expuestos a la idea de que las escuelas son altamente meritocráticas tendían a percibir menos injusticia en las desigualdades de clase y mostraban menos apoyo a políticas de redistribución económica o a la acción colectiva para reducir la desigualdad. Además, en los estudios internacionales, los resultados sugieren que la creencia en la meritocracia escolar es especialmente significativa en personas con mayor nivel educativo, que tienden a justificar la desigualdad en función de esta creencia en los principios meritocráticos.
 
-The `echo: false` option disables the printing of code (only output is displayed).
+Finalmente, el artículo concluye que la creencia en la meritocracia escolar no solo contribuye a justificar la desigualdad en el contexto educativo, sino que también tiene implicaciones en cómo se perciben y justifican las desigualdades en la sociedad en general. Así, esta creencia podría actuar como una barrera ideológica que limita el apoyo a políticas de igualdad y refuerza la estructura jerárquica en la sociedad.
+
+#### *Darnon et al*
+
+El artículo de Darnon et al. (2017) examina cómo la creencia en la meritocracia escolar afecta la brecha de logros entre estudiantes de diferentes clases sociales. La meritocracia escolar implica la idea de que el esfuerzo y la habilidad individual son los únicos determinantes del éxito académico, dejando de lado factores como el estatus socioeconómico (SES). Sin embargo, los autores cuestionan esta creencia, argumentando que puede perpetuar las desigualdades sociales al hacer que los estudiantes atribuyan su rendimiento solo a factores internos.
+
+En el estudio, los estudiantes de quinto grado fueron expuestos a un texto que enfatizaba la meritocracia escolar o a un contenido neutral. Los resultados indicaron que los estudiantes de bajo SES tuvieron un desempeño menor en el contexto de la meritocracia en comparación con la condición neutral, mientras que los estudiantes de alto SES no mostraron cambios significativos en su rendimiento. Esto sugiere que enfatizar la meritocracia puede aumentar la brecha de rendimiento entre los estudiantes de diferente SES.
+
+La investigación explora dos posibles mecanismos que podrían explicar este efecto. Primero, la autoeficacia, o la confianza en la capacidad de uno mismo para tener éxito en la escuela, influye en el rendimiento escolar y tiende a ser menor en los estudiantes de bajo SES. La exposición a la meritocracia escolar refuerza esta internalización, lo que afecta de manera negativa el rendimiento de los estudiantes de bajo SES.
+
+Segundo, la creencia en la meritocracia escolar actúa como una herramienta de justificación del sistema, especialmente entre los estudiantes de bajo SES, lo cual contribuye a que estos acepten su posición en el sistema educativo como algo merecido. Esto se convierte en una creencia debilitante que reduce su rendimiento y aumenta la desigualdad.
+
+En conclusión, el estudio sugiere que, aunque la meritocracia escolar suele promoverse para fomentar el esfuerzo, también puede reforzar las desigualdades sociales y agrandar la brecha de logros académicos entre estudiantes de diferentes clases sociales.
+
+#### *Wiederkehr et al*
+
+El artículo de Wiederkehr et al. (2015) explora cómo la creencia en la meritocracia escolar (BSM) funciona como una herramienta de justificación del sistema, especialmente entre estudiantes de bajo estatus social. La BSM sostiene que el éxito escolar depende únicamente del esfuerzo individual y la voluntad, a pesar de la evidencia de que factores como la clase social y el género también influyen en los resultados académicos. Los autores argumentan que esta creencia permite a los estudiantes de bajo estatus aceptar su posición en la jerarquía social como algo merecido, lo que ayuda a reducir su percepción de desigualdad y amenaza de injusticia.
+
+En el primer estudio, se encontró que los estudiantes de bajo estatus social que creen en la BSM tienden a justificar la sociedad como justa y meritocrática, algo que no ocurrió entre los estudiantes de alto estatus. Esto sugiere que para los estudiantes de bajo estatus, la BSM proporciona un marco que legitima su futuro lugar en la sociedad, dándoles una ilusión de control sobre su movilidad social.
+
+El segundo estudio analizó cómo reaccionan los estudiantes de diferentes niveles de estatus ante la presión de los procesos de selección en la universidad. Los resultados indicaron que los estudiantes de bajo estatus aumentaron su creencia en la BSM cuando se les recordó la alta tasa de fracaso académico, lo que sugiere que la dependencia de este sistema para lograr la movilidad social refuerza la BSM como una forma de justificar su posición futura.
+
+En conjunto, los hallazgos de ambos estudios apoyan la idea de que la BSM actúa como una herramienta de justificación del sistema para los estudiantes de bajo estatus, facilitándoles aceptar la desigualdad social como justa y legítima. Este mecanismo, aunque reduce el malestar asociado a la desigualdad, puede perpetuar la estratificación social al hacer que los estudiantes de bajo estatus internalicen su lugar en el sistema como merecido, limitando así su apoyo a reformas estructurales que podrían promover una mayor equidad.
