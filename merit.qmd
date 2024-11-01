@@ -9,7 +9,7 @@ lang: es
 
 Análisis factorial de la encuesta edumer realizada entre (año) y (año), que busca medir las percepciones de desiguladad dentro del ámbito escolar. Basado en una escala de percepciones y creencias sobre meritocracia (Castillo et al, 2023)
 
-## Antecedentes y conceptos 
+## Antecedentes y conceptos
 
 Meritocracia (ocupar a Young que siempre se ocupa) creencia de esfuerzo y trabajo propio como culpable del exito
 
