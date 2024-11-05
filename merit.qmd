@@ -9,7 +9,7 @@ lang: es
 
 ## **Contexto y motivación del estudio**
 
--Parte del proyectoFONDECYT 1210847  “Meritocracia en la escuela: fundamentos morales del mercado educativo y sus implicancias para la formación ciudadana en Chile”.
+-Parte del proyectoFONDECYT 1210847  "Meritocracia en la escuela: fundamentos morales del mercado educativo y sus implicancias para la formación ciudadana en Chile".
 
 -Análisis factorial de la encuesta EDUMER realizada en escuelas de Chile entre los años 2023-2024. La encuesta consta de 900 respuestas entre estudiantes de básica y media.
 
@@ -21,7 +21,7 @@ lang: es
 
 ## **Antecedentes y conceptos**
 
--Meritocracia (Young, 1957): concepto de sociedad distópica planteado en “The rise of meritocracy” en el que la justificación de las desigualdades, y la asignación de recursos por parte de la sociedad se basa en el esfuerzo, talento y mérito individual. Se deja de lado componentes estructurales en pos de la creencia en el esfuerzo propio como forma de salir adelante.
+-Meritocracia (Young, 1957): concepto de sociedad distópica planteado en "The rise of meritocracy" en el que la justificación de las desigualdades, y la asignación de recursos por parte de la sociedad se basa en el esfuerzo, talento y mérito individual. Se deja de lado componentes estructurales en pos de la creencia en el esfuerzo propio como forma de salir adelante.
 
 -Creencia de la meritocracia en la escuela (Wiederkehr et al): la creencia en el mérito dentro del contexto escolar opera de forma de justificar el sistema y la posición misma que se tiene en el sistema, escondiendo o dejando de lado cuestiones como el género o la clase. De acuerdo a este estudio, quienes tienen una mayor creencia de la meritocracia en la escuela tienden a justificar más su posición estructural como una causa o consecuencia de su actuar individual, escondiendo componentes estructurales. La creencia de la meritocracia en la escuela opera como un dispositivo justificador del sistema imperante dentro de las clases bajas, ya que estos aceptan o dan por cierta la idea de que el éxito escolar depende netamente de su esfuerzo y talento propio podría homologarse hacia su posición en la estructura social.
 
