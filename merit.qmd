@@ -5,6 +5,8 @@ author: "Jesús Díaz Molina-Benjamín Zavala"
 format: html
 editor: visual
 lang: es
+project: website
+type: docs
 ---
 
 ## **Contexto y motivación del estudio**
