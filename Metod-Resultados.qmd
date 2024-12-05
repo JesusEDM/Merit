@@ -29,7 +29,10 @@ pacman::p_load(tidyverse,
                gtools,
                RColorBrewer,
                skimr,
-               readxl)
+               readxl,
+               dplyr,
+               summarytools,
+               labelled)
 
 
 options(scipen=999)
@@ -53,6 +56,52 @@ Muestreo no probabilístico
 Su objetivo es analizar el impacto de aspectos centrales del mercado educativo en Chile en las percepciones y creencias sobre meritocracia, así como también en la formación ciudadana
 
 #### 2. Variables
+
+```{r datos variables preferencias y percepciones, echo=FALSE}
+pref_perc_subset <- db_long %>%       #crear subset
+  select(perc_effort, perc_talent, perc_rich_parents, perc_contact, 
+         pref_effort, pref_talent, pref_rich_parents, pref_contact) %>% 
+  as.data.frame()
+
+pref_perc_subset <- pref_perc_subset %>%
+  mutate(
+    across(
+      everything(), # Aplica a todas las columnas
+      ~ recode(.,
+               '1' = "Muy en desacuerdo",
+               '2' = "En desacuerdo",
+               '3' = "De acuerdo",
+               '4' = "Muy de acuerdo")
+    )
+  )
+
+var_label(pref_perc_subset$perc_effort) <- "En Chile, las personas son recompensadas por sus esfuerzos"
+var_label(pref_perc_subset$perc_talent) <- "En Chile, las personas son recompensadas por su inteligencia y habilidad"
+var_label(pref_perc_subset$perc_rich_parents) <- "En Chile, a quienes tienen padres ricos les va mucho mejor en la vida"
+var_label(pref_perc_subset$pref_contact) <- "En Chile, quienes tienen buenos contactos les va mejor en la vida"
+var_label(pref_perc_subset$pref_effort) <- "Quienes más se esfuerzan deberían obtener mayores recompensas que quienes se esfuerzan menos"
+var_label(pref_perc_subset$pref_talent) <- "Quienes poseen más talento deberían obtener mayores recompensas que quienes poseen menos talento"
+var_label(pref_perc_subset$pref_rich_parents) <- "Está bien que quienes tienen padres ricos les vaya bien en la vida"
+var_label(pref_perc_subset$pref_contact) <- "Esta bien que quienes tienen buenos contactos les vaya bien en la vida"
+
+df<-dfSummary(pref_perc_subset[,],
+               plain.ascii = FALSE,
+               style = "multiline",
+               tmp.img.dir = "/tmp",
+               graph.magnif = 0.75,
+               headings = F,  # encabezado
+               varnumbers = F, # num variable
+               labels.col = T, # etiquetas
+               na.col = F,    # missing
+               graph.col = F, # plot
+               valid.col = T, # n valido
+               col.widths = c(30,10,10,10))
+
+df$Variable <- NULL # delete variable column
+
+print(df)
+
+```
 
 #### 3. Métodos
 
@@ -379,4 +428,4 @@ f_sem1 <- sem(m_sem1, data = subset(db_long, ola == 1))
 summary(f_sem1, fit.measures = T, standardized = T)
 ```
 
-####  
+#### 
