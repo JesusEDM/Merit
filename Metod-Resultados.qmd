@@ -9,9 +9,7 @@ lang: es
 
 ## Metodología
 
- -Resumen de toda la metodología (1 párrafo)
-
-El análisis se organiza en 2 fases. La primera consta de un análisis factorial confirmatorio del instrumento que busca operacionalizar el modelo conceptual de meritocracia, a través de la encuesta EDUMER realizada en escuelas. En segundo lugar, se encuentra un análisis longitudinal considerando 2 olas de encuestas. A partir de un análisis de  invarianza entre olas
+El análisis se organiza en 2 fases. La primera consta de un análisis factorial confirmatorio del instrumento que busca operacionalizar el modelo conceptual de meritocracia, a través de la encuesta EDUMER realizada en escuelas. En segundo lugar, se encuentra un análisis longitudinal considerando las 2 olas de encuestas; a partir de un análisis de invarianza entre olas.
 
 ```{r librerias, echo=FALSE}
 
@@ -32,7 +30,8 @@ pacman::p_load(tidyverse,
                readxl,
                dplyr,
                summarytools,
-               labelled)
+               labelled,
+               kableExtra)
 
 
 options(scipen=999)
@@ -45,17 +44,13 @@ rm(list = ls())
 load(file = here("Input", "data", "db_long_proc.RData"))
 ```
 
- -Explicación de la base de datos EDUMER
-
-Encuesta panel a nueve colegios entre la Región Metropolitana y de Valpo. Se realizaron dos olas entre 2023 (ola 1) y 2024 (ola 2). 839 primera ola, 659 segunda ola
-
-Realizada a cursos de sexto y primero medio (noveno grado), que posteriormente septimo y segundo medio (decimo grado)
-
-Muestreo no probabilístico
-
-Su objetivo es analizar el impacto de aspectos centrales del mercado educativo en Chile en las percepciones y creencias sobre meritocracia, así como también en la formación ciudadana
+Los datos fueron extraídos de la encuesta panel longitudinal de Educación y Meritocracia (EDUMER). La encuesta EDUMER tiene como objetivo analizar el impacto de aspectos centrales del mercado educativo en las percepciones y creencias sobre la meritocracia, así como el impacto que puede tener dentro de la formación ciudadana. Esta fue realizada a nueve colegios chilenos, ubicados entre la Región Metropolitana y la Región de Valparaíso. Para esta encuesta se desarrollaron cuestionarios online en dos olas entre los años 2023 (ola 1) y 2024 (ola 2), aplicados a cursos de sexto básico y primero medio, que tras el cambio de año corresponden a séptimo básico y segundo medio. La primera ola presenta un N=839, mientras que la segunda un N=659, contando ambas con un tipo de muestra no probabilístico, por las características propias de cada colegio, que no llegan a ser representativas de la población escolar a nivel nacional.
 
 #### 2. Variables
+
+Las variables utilizadas para medir preferencias y percepciones tanto meritocráticas como no meritocráticas fueron operacionalizadas ocupando los ítems propuestos por Castillo et al (Castillo et al, 2023). Donde la percepción refiere a cómo se piensa que opera la meritocracia y la creencia en cómo debería ser la meritocracia. Los componentes meritocráticos refieren a cuestiones como talento (perc_talent ; pref_talent)  y esfuerzo (perc_effort ; pref_effort), mientras que los no meritocráticos a el tener padres ricos (perc_rich_parents ; pref_rich_parents) y tener buenos contactos (perc_contact ; pref_contact). Las categorías de respuesta de estas variables son en escala Likert que van del 1 “Muy en desacuerdo” al 4 “Muy de acuerdo“ de acuerdo a preguntas que vayan en relación con los componentes  mencionados. Por otra parte, se toman en consideración las variables referentes a la justicia de mercado, donde se pregunta por si el acceso a servicios debería estar condicionado por el dinero que pueda que pueda tener un individuo. Se toman en consideración los servicios de educación (just_educ), salud (just_health) y pensión (just_pension). Las categorías de respuesta son de tipo Likert donde 1 es “..” y 4 “... “.También se consideró el promedio de las 3 preguntas referentes a justicia de mercado (mjp)
+
+La siguiente tabla muestra los porcentajes y cantidades de respuesta de cada una de las variables referentes a percepciones y preferencias meritocráticas, así como la afirmación realizada a la que debían expresar su grado de acuerdo:
 
 ```{r datos variables preferencias y percepciones, echo=FALSE}
 pref_perc_subset <- db_long %>%       #crear subset
@@ -78,17 +73,17 @@ pref_perc_subset <- pref_perc_subset %>%
 var_label(pref_perc_subset$perc_effort) <- "En Chile, las personas son recompensadas por sus esfuerzos"
 var_label(pref_perc_subset$perc_talent) <- "En Chile, las personas son recompensadas por su inteligencia y habilidad"
 var_label(pref_perc_subset$perc_rich_parents) <- "En Chile, a quienes tienen padres ricos les va mucho mejor en la vida"
-var_label(pref_perc_subset$pref_contact) <- "En Chile, quienes tienen buenos contactos les va mejor en la vida"
+var_label(pref_perc_subset$perc_contact) <- "En Chile, quienes tienen buenos contactos les va mejor en la vida"
 var_label(pref_perc_subset$pref_effort) <- "Quienes más se esfuerzan deberían obtener mayores recompensas que quienes se esfuerzan menos"
 var_label(pref_perc_subset$pref_talent) <- "Quienes poseen más talento deberían obtener mayores recompensas que quienes poseen menos talento"
 var_label(pref_perc_subset$pref_rich_parents) <- "Está bien que quienes tienen padres ricos les vaya bien en la vida"
 var_label(pref_perc_subset$pref_contact) <- "Esta bien que quienes tienen buenos contactos les vaya bien en la vida"
 
-df<-dfSummary(pref_perc_subset[,],
+pref_perc_table<-dfSummary(pref_perc_subset[,],
                plain.ascii = FALSE,
                style = "multiline",
                tmp.img.dir = "/tmp",
-               graph.magnif = 0.75,
+               graph.magnif = 0.70,
                headings = F,  # encabezado
                varnumbers = F, # num variable
                labels.col = T, # etiquetas
@@ -97,10 +92,50 @@ df<-dfSummary(pref_perc_subset[,],
                valid.col = T, # n valido
                col.widths = c(30,10,10,10))
 
-df$Variable <- NULL # delete variable column
+pref_perc_table$Variable <- NULL # delete variable column
 
-print(df)
+pref_perc_table
+```
 
+Por otro lado, la siguiente tabla muestra los porcentajes y cantidades de respuesta de cada una de las variables referentes a justicia de mercado, así como la afirmación realizada a la que debían expresar su grado de acuerdo:
+
+```{r datos y variables preferencias justicia de mercado, echo=FALSE}
+just_market <- db_long %>%       #crear subset
+  select(just_health, just_pension, just_educ) %>% 
+  as.data.frame()
+
+just_market <- just_market %>%
+  mutate(
+    across(
+      everything(), # Aplica a todas las columnas
+      ~ recode(.,
+               '1' = "Muy en desacuerdo",
+               '2' = "En desacuerdo",
+               '3' = "De acuerdo",
+               '4' = "Muy de acuerdo")
+    )
+  )
+var_label(just_market$just_health) <- "Está bien que aquellos que puedan pagar más tengan mejor acceso a salud"
+var_label(just_market$just_pension) <- "Está bien que en Chile, las personas con mayores ingresos puedan tener mejores pensiones que las personas de ingresos más bajos"
+var_label(just_market$just_educ) <- "Está bien que aquellos que puedan pagar más tengan mejor educación"
+
+
+just_market_table<-dfSummary(just_market[,],
+               plain.ascii = FALSE,
+               style = "multiline",
+               tmp.img.dir = "/tmp",
+               graph.magnif = 0.70,
+               headings = F,  # encabezado
+               varnumbers = F, # num variable
+               labels.col = T, # etiquetas
+               na.col = F,    # missing
+               graph.col = F, # plot
+               valid.col = T, # n valido
+               col.widths = c(30,10,10,10))
+
+just_market_table$Variable <- NULL # delete variable column
+
+just_market_table
 ```
 
 #### 3. Métodos
