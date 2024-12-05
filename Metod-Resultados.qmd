@@ -9,27 +9,374 @@ lang: es
 
 ## Metodología
 
+ -Resumen de toda la metodología (1 párrafo)
+
+El análisis se organiza en 2 fases. La primera consta de un análisis factorial confirmatorio del instrumento que busca operacionalizar el modelo conceptual de meritocracia, a través de la encuesta EDUMER realizada en escuelas. En segundo lugar, se encuentra un análisis longitudinal considerando 2 olas de encuestas. A partir de un análisis de  invarianza entre olas
+
+```{r librerias, echo=FALSE}
+
+pacman::p_load(tidyverse,
+               sjmisc, 
+               sjPlot,
+               here,
+               lavaan,
+               psych,
+               corrplot,
+               ggdist,
+               patchwork,
+               sjlabelled,
+               semTools,
+               gtools,
+               RColorBrewer,
+               skimr,
+               readxl)
+
+
+options(scipen=999)
+rm(list = ls())
+```
+
 #### 1. Datos
 
-```{r, echo = FALSE}
+```{r cargar base, echo = FALSE}
 load(file = here("Input", "data", "db_long_proc.RData"))
 ```
 
+ -Explicación de la base de datos EDUMER
+
+Encuesta panel a nueve colegios entre la Región Metropolitana y de Valpo. Se realizaron dos olas entre 2023 (ola 1) y 2024 (ola 2). 839 primera ola, 659 segunda ola
+
+Realizada a cursos de sexto y primero medio (noveno grado), que posteriormente septimo y segundo medio (decimo grado)
+
+Muestreo no probabilístico
+
+Su objetivo es analizar el impacto de aspectos centrales del mercado educativo en Chile en las percepciones y creencias sobre meritocracia, así como también en la formación ciudadana
+
 #### 2. Variables
 
-#### 3. Métodos 
+#### 3. Métodos
 
-## Bullets
+## Resultados
 
-When you click the **Render** button a document will be generated that includes:
+#### 1. Univariados
 
--   Content authored with markdown
--   Output from executable code
+```{r descriptivos ola 1, echo=FALSE}
+t1 <- db_long %>% 
+  filter(ola == 1) %>% 
+  select(-c(1:3)) %>% 
+  skim() %>% 
+  yank("numeric") %>% 
+  as_tibble() %>% 
+  mutate(range = paste0("(",p0,"-",p100,")")) %>% 
+  mutate_if(.predicate = is.numeric, .funs = ~ round(.,2)) %>% 
+  select("Variable" = skim_variable,"Mean"= mean, "SD"=sd, "Range" = range, "Histogram"=hist) 
 
-## Code
-
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
+t1 %>% 
+  kableExtra::kable(format = "markdown")
 ```
+
+```{r descriptivos ola 2, echo=FALSE}
+t2 <- db_long %>% 
+  filter(ola == 2) %>% 
+  select(-c(1:3)) %>% 
+  skim() %>% 
+  yank("numeric") %>% 
+  as_tibble() %>% 
+  mutate(range = paste0("(",p0,"-",p100,")")) %>% 
+  mutate_if(.predicate = is.numeric, .funs = ~ round(.,2)) %>% 
+  select("Variable" = skim_variable,"Mean"= mean, "SD"=sd, "Range" = range, "Histogram"=hist) 
+
+t2 %>% 
+  kableExtra::kable(format = "markdown")
+```
+
+```{r likert ola 1, echo=FALSE}
+
+theme_set(theme_ggdist())
+colors <- RColorBrewer::brewer.pal(n = 4, name = "RdBu")
+
+a <- db_long %>% 
+  filter(ola == 1) %>%
+  select(starts_with("perc")) %>% 
+  sjPlot::plot_likert(geom.colors = colors,
+                      title = c("a. Percepciones"),
+                      geom.size = 0.8,
+                      axis.labels = c("Esfuerzo", "Talento", "Padres ricos", "Contactos"),
+                      catcount = 4,
+                      values  =  "sum.outside",
+                      reverse.colors = F,
+                      reverse.scale = T,
+                      show.n = FALSE,
+                      show.prc.sign = T
+                      ) +
+  ggplot2::theme(legend.position = "none")
+
+b <- db_long %>% 
+  filter(ola == 1) %>% 
+  select(starts_with("pref")) %>% 
+  sjPlot::plot_likert(geom.colors = colors,
+                      title = c("b. Preferencias"),
+                      geom.size = 0.8,
+                     axis.labels = c("Esfuerzo", "Talento", "Padres ricos", "Contactos"),
+                      catcount = 4,
+                      values  =  "sum.outside",
+                      reverse.colors = F,
+                      reverse.scale = T,
+                      show.n = FALSE,
+                      show.prc.sign = T
+  ) +
+  ggplot2::theme(legend.position = "bottom")
+
+likerplot1 <- a / b + plot_annotation(caption = paste0("Fuente: Elaboración propia en base a Encuesta Panel EDUMER Ola 1"," (n = ",dim(db_long[db_long$ola==1,])[1],")"
+))
+
+likerplot1
+```
+
+```{r likert ola 2,echo=FALSE}
+
+theme_set(theme_ggdist())
+colors <- RColorBrewer::brewer.pal(n = 4, name = "RdBu")
+
+a <- db_long %>% 
+  filter(ola == 2) %>%
+  select(starts_with("perc")) %>% 
+  sjPlot::plot_likert(geom.colors = colors,
+                      title = c("a. Percepciones"),
+                      geom.size = 0.8,
+                      axis.labels = c("Esfuerzo", "Talento", "Padres ricos", "Contactos"),
+                      catcount = 4,
+                      values  =  "sum.outside",
+                      reverse.colors = F,
+                      reverse.scale = T,
+                      show.n = FALSE,
+                      show.prc.sign = T
+                      ) +
+  ggplot2::theme(legend.position = "none")
+
+b <- db_long %>% 
+  filter(ola == 2) %>% 
+  select(starts_with("pref")) %>% 
+  sjPlot::plot_likert(geom.colors = colors,
+                      title = c("b. Preferencias"),
+                      geom.size = 0.8,
+                     axis.labels = c("Esfuerzo", "Talento", "Padres ricos", "Contactos"),
+                      catcount = 4,
+                      values  =  "sum.outside",
+                      reverse.colors = F,
+                      reverse.scale = T,
+                      show.n = FALSE,
+                      show.prc.sign = T
+  ) +
+  ggplot2::theme(legend.position = "bottom")
+
+likerplot2 <- a / b + plot_annotation(caption = paste0("Fuente: Elaboración propia en base a Encuesta Panel EDUMER Ola 2"," (n = ",dim(db_long[db_long$ola==2,])[1],")"
+))
+
+likerplot2
+```
+
+#### 2. Bivariados
+
+```{r correlaciones ola 1, echo=FALSE}
+M <- psych::polychoric(db_long[db_long$ola==1,][c(4:11,15)])
+
+P <- cor(db_long[db_long$ola==1,][c(4:11,15)], method = "pearson")
+
+diag(M$rho) <- NA
+
+diag(P) <- NA
+
+M$rho[9,] <- P[9,]
+
+rownames(M$rho) <- c("A. Percepción Esfuerzo",
+                     "B. Percepción Talento",
+                     "C. Percepción Padres Ricos",
+                     "D. Percepción Contactos",
+                     "E. Preferencias Esfuerzo",
+                     "F. Preferencias Talento",
+                     "G. Preferencias Padres Ricos",
+                     "H. Preferencias Contactos",
+                     "I. Market Justice Preferences")
+
+#set Column names of the matrix
+colnames(M$rho) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)",
+                       "(H)","(I)")
+
+rownames(P) <- c("A. Percepción Esfuerzo",
+                     "B. Percepción Talento",
+                     "C. Percepción Padres Ricos",
+                     "D. Percepción Contactos",
+                     "E. Preferencias Esfuerzo",
+                     "F. Preferencias Talento",
+                     "G. Preferencias Padres Ricos",
+                     "H. Preferencias Contactos",
+                     "I. Market Justice Preferences")
+
+#set Column names of the matrix
+colnames(P) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)",
+                    "(H)","(I)")
+
+testp <- cor.mtest(M$rho, conf.level = 0.95)
+
+#Plot the matrix using corrplot
+corrplot::corrplot(M$rho,
+                   method = "color",
+                   addCoef.col = "black",
+                   type = "upper",
+                   tl.col = "black",
+                   col = colorRampPalette(c("#E16462", "white", "#0D0887"))(12),
+                   bg = "white",
+                   na.label = "-")
+```
+
+```{r correlaciones ola 2, echo=FALSE}
+M2 <- psych::polychoric(db_long[db_long$ola==2,][c(4:11,15)])
+
+P2 <- cor(db_long[db_long$ola==2,][c(4:11,15)], method = "pearson")
+
+diag(M2$rho) <- NA
+
+diag(P2) <- NA
+
+M2$rho[9,] <- P[9,]
+
+rownames(M2$rho) <- c("A. Percepción Esfuerzo",
+                     "B. Percepción Talento",
+                     "C. Percepción Padres Ricos",
+                     "D. Percepción Contactos",
+                     "E. Preferencias Esfuerzo",
+                     "F. Preferencias Talento",
+                     "G. Preferencias Padres Ricos",
+                     "H. Preferencias Contactos",
+                     "I. Market Justice Preferences")
+
+#set Column names of the matrix
+colnames(M2$rho) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)",
+                       "(H)","(I)")
+
+rownames(P2) <- c("A. Percepción Esfuerzo",
+                     "B. Percepción Talento",
+                     "C. Percepción Padres Ricos",
+                     "D. Percepción Contactos",
+                     "E. Preferencias Esfuerzo",
+                     "F. Preferencias Talento",
+                     "G. Preferencias Padres Ricos",
+                     "H. Preferencias Contactos",
+                     "I. Market Justice Preferences")
+
+#set Column names of the matrix
+colnames(P2) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)",
+                    "(H)","(I)")
+
+testp <- cor.mtest(M2$rho, conf.level = 0.95)
+
+#Plot the matrix using corrplot
+corrplot::corrplot(M2$rho,
+                   method = "color",
+                   addCoef.col = "black",
+                   type = "upper",
+                   tl.col = "black",
+                   col = colorRampPalette(c("#E16462", "white", "#0D0887"))(12),
+                   bg = "white",
+                   na.label = "-")
+```
+
+#### 3. Multivariados
+
+#### 3.1 CFA
+
+```{r CFA ola 1 y 2, echo=FALSE}
+# model
+model_cfa <- '
+  perc_merit = ~ perc_effort + perc_talent
+  perc_nmerit = ~ perc_rich_parents + perc_contact
+  pref_merit = ~ pref_effort + pref_talent
+  pref_nmerit = ~ pref_rich_parents + pref_contact
+  '
+
+# estimation for each order set
+
+m1_cfa <- cfa(model = model_cfa, 
+              data = subset(db_long, ola == 1),
+              estimator = "DWLS",
+              ordered = T,
+              std.lv = F) 
+
+m2_cfa <- cfa(model = model_cfa, 
+              data = subset(db_long, ola == 2), 
+              estimator = "DWLS",
+              ordered = T,
+              std.lv = F)
+
+summary(m1_cfa, fit.measures = T, standardized = T); summary(m2_cfa, fit.measures = T, standardized = T)
+```
+
+```{r cargas factoriales ola 1 y 2, echo=FALSE}
+left_join(
+standardizedsolution(m1_cfa) %>% 
+  filter(op=="=~") %>%
+  select(lhs,rhs,loadings_w01=est.std,pvalue_w01=pvalue),
+standardizedsolution(m2_cfa) %>% 
+  filter(op=="=~") %>%
+  select(lhs,rhs,loadings_w02=est.std,pvalue_w02=pvalue)
+) %>% 
+  mutate(
+    across(
+      .cols = c(pvalue_w01, pvalue_w02),
+      .fns = ~ case_when(
+        . < 0.05 & . > 0.01 ~ "*",
+        . <= 0.01 ~ "**",
+        TRUE ~ "")
+    ),
+    loadings_w01 = paste(round(loadings_w01, 3), pvalue_w01, sep = " "),
+    loadings_w02 = paste(round(loadings_w02, 3), pvalue_w02, sep = " "),
+    lhs = case_when(
+      lhs == "perc_merit" ~ "Percepción meritocrática",
+      lhs == "perc_nmerit" ~ "Percepción no meritocrática",
+      lhs == "pref_merit" ~ "Preferencia meritocrática",
+      lhs == "pref_nmerit" ~ "Preferencia no meritocrática"),
+    rhs = case_when(
+      rhs == "perc_effort" ~ "Percepción esfuerzo",
+      rhs == "perc_talent" ~ "Percepción talento",
+      rhs == "perc_rich_parents" ~ "Percepción padres ricos",
+      rhs == "perc_contact" ~ "Percepción contactos",
+      rhs == "pref_effort" ~ "Preferencia esfuerzo",
+      rhs == "pref_talent" ~ "Preferencia talento",
+      rhs == "pref_rich_parents" ~ "Preferencia padres ricos",
+      rhs == "pref_contact" ~ "Preferencia contactos"),
+    simbol = "=~"
+  ) %>% 
+  select(lhs, simbol, rhs, loadings_w01, loadings_w02) %>% 
+  kableExtra::kable(format = "markdown",
+                    booktabs= T, 
+                    escape = F, 
+                    align = 'c',
+                    col.names = c("Factor", "", "Indicador", "Cargas Ola 1", "Cargas Ola 2"),
+                    caption = "Cargas factoriales en ambas Olas") %>% 
+  kableExtra::add_footnote(label = "** p<0.01, * p<0.5", notation = "none")
+```
+
+#### 3.2 SEM
+
+```{r modelo SEM, echo=FALSE}
+## Especificar el modelo: medición y estructural
+m_sem1 <- '
+# Modelo medición
+perc_merit = ~ perc_effort + perc_talent
+perc_nmerit = ~ perc_rich_parents + perc_contact
+pref_merit = ~ pref_effort + pref_talent
+pref_nmerit = ~ pref_rich_parents + pref_contact
+
+  # Modelo estructural
+mjp ~  perc_merit + perc_nmerit + pref_merit + pref_nmerit
+'
+
+## Ajustar modelo
+f_sem1 <- sem(m_sem1, data = subset(db_long, ola == 1))
+
+## Ver resultados completos
+summary(f_sem1, fit.measures = T, standardized = T)
+```
+
+####  
