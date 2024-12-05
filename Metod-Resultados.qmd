@@ -1,0 +1,35 @@
+---
+title: "Metodología y Resultados"
+subtitle: "Equipo Alfa de Cronbach"
+author: "Jesús Díaz Molina-Benjamín Zavala"
+format: html
+editor: visual
+lang: es
+---
+
+## Metodología
+
+#### 1. Datos
+
+```{r, echo = FALSE}
+load(file = here("Input", "data", "db_long_proc.RData"))
+```
+
+#### 2. Variables
+
+#### 3. Métodos 
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
